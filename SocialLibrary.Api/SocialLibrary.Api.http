@@ -1,0 +1,6 @@
+@SocialLibrary.Api_HostAddress = http://localhost:5008
+
+GET {{SocialLibrary.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
