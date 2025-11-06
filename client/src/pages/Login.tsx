@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../auth/AuthContext";
 import api from "../lib/api";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -59,6 +60,8 @@ export default function Login() {
         />
         <button>Giriş</button>
       </form>
+	  <small>Hesabın yok mu? <Link to="/register">Kayıt ol</Link></small>
+
     </div>
   );
 }

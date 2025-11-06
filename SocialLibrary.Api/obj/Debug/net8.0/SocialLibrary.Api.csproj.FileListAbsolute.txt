@@ -126,3 +126,4 @@ C:\Users\yigit\source\repos\SocialLibrary.Api\SocialLibrary.Api\bin\Debug\net8.0
 C:\Users\yigit\source\repos\SocialLibrary.Api\SocialLibrary.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\yigit\source\repos\SocialLibrary.Api\SocialLibrary.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\yigit\source\repos\SocialLibrary.Api\SocialLibrary.Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\yigit\source\repos\SocialLibrary.Api\SocialLibrary.Api\obj\Debug\net8.0\SocialLibrary.Api.sourcelink.json

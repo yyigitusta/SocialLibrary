@@ -3,16 +3,17 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using SocialLibrary.Api.Domain;
 using SocialLibrary.Api.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Db
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
+// Identity
 builder.Services
     .AddIdentityCore<ApplicationUser>(opt =>
     {
@@ -21,56 +22,87 @@ builder.Services
     })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
-var jwtSection = builder.Configuration.GetSection("Jwt");
-var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSection["Key"]!));
+
+// JWT
+var jwt = builder.Configuration.GetSection("Jwt");
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["Key"]!));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(o =>
+    .AddJwtBearer(opt =>
     {
-        o.TokenValidationParameters = new TokenValidationParameters
+        opt.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = jwtSection["Issuer"],
+            ValidIssuer = jwt["Issuer"],
             ValidateAudience = true,
-            ValidAudience = jwtSection["Audience"],
+            ValidAudience = jwt["Audience"],
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = key,
-            ValidateLifetime = true,
-            ClockSkew = TimeSpan.FromMinutes(2)
+            ValidateLifetime = true
         };
     });
 
 builder.Services.AddAuthorization();
 
-// (React için CORS; Vite default 5173)
+// HttpClient (search & content için)
+builder.Services.AddHttpClient();
+
+// CORS
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("client", p => p
-         .WithOrigins("http://localhost:5173", "https://localhost:5173")
+        .WithOrigins("http://localhost:5173", "https://localhost:5173")
         .AllowAnyHeader()
         .AllowAnyMethod()
         .AllowCredentials());
 });
 
+// Controllers
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// Swagger — app.Build'dan ÖNCE
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "SocialLibrary.Api", Version = "v1" });
+
+    // JWT auth tanýmý
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT token için: Bearer {token}"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-app.UseCors("client");
+// Middleware sýrasý
+app.UseSwagger();
+app.UseSwaggerUI();
 
+app.UseCors("client");
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();
