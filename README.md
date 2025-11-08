@@ -17,7 +17,7 @@ Token saklama (localStorage) ve AuthContext
 
 Google Books API ile kitap arama
 
-*******FİLM KISMINDA VERİ ÇEKİLEMEMİŞTİR MOCK VERİ KULLANILMIŞTIR******
+*******FİLM KISMINDA VERİ ÇEKİLMEMİŞTİR MOCK VERİ KULLANILMIŞTIR******
 
 Başlık, kapak ve yıl bilgisiyle kart listesi
 
