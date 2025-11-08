@@ -3,7 +3,6 @@
 SocialLibrary, kitap ve filmler için kullanıcıların puan verebildiği, yorum yapabildiği ve tüm aktivitelerin feed akışında listelendiği tam stack bir sosyal kütüphane uygulamasıdır.
 Backend ASP.NET Core + PostgreSQL, frontend ise React (Vite + TypeScript) ile geliştirilmiştir.
 
-*******FİLM KISMINDA VERİ ÇEKİLEMEMİŞTİR MOCK VERİ KULLANILMIŞTIR******
 
 🚀 Özellikler
 🔐 Kullanıcı Sistemi
@@ -18,7 +17,7 @@ Token saklama (localStorage) ve AuthContext
 
 Google Books API ile kitap arama
 
-TMDb API ile film arama
+*******FİLM KISMINDA VERİ ÇEKİLEMEMİŞTİR MOCK VERİ KULLANILMIŞTIR******
 
 Başlık, kapak ve yıl bilgisiyle kart listesi
 
