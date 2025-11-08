@@ -17,18 +17,56 @@ const Private: React.FC<{children: React.ReactNode}> = ({ children }) => {
 };
 
 function Nav() {
-  const { token } = useAuth();
+  const { token, logout } = useAuth();
   return (
-    <nav style={{display:"flex",gap:12,padding:12,borderBottom:"1px solid #eee"}}>
-      <Link to="/">Ana Sayfa</Link>
-      {token && <>
-        <Link to="/search/books">Kitap Ara</Link>
-        <Link to="/search/movies">Film Ara</Link>
-      </>}
-      {!token && <>
-        <Link to="/login">Giriş</Link>
-        <Link to="/register">Kayıt</Link>
-      </>}
+    <nav
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "12px 20px",
+        background: "#1976d2",
+        color: "white",
+        position: "sticky",
+        top: 0,
+        zIndex: 10,
+      }}
+    >
+      <div style={{ display: "flex", gap: 16 }}>
+        <Link to="/" style={{ color: "white", textDecoration: "none", fontWeight: 600 }}>
+          SocialLibrary
+        </Link>
+        {token && (
+          <>
+            <Link to="/search/books" style={{ color: "white", textDecoration: "none" }}>
+              Kitaplar
+            </Link>
+            <Link to="/search/movies" style={{ color: "white", textDecoration: "none" }}>
+              Filmler
+            </Link>
+          </>
+        )}
+      </div>
+      <div>
+        {token ? (
+          <button
+            onClick={logout}
+            style={{
+              background: "white",
+              color: "#1976d2",
+              fontWeight: 600,
+              padding: "6px 12px",
+            }}
+          >
+            Çıkış
+          </button>
+        ) : (
+          <>
+            <Link to="/login" style={{ color: "white", marginRight: 12 }}>Giriş</Link>
+            <Link to="/register" style={{ color: "white" }}>Kayıt</Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 }

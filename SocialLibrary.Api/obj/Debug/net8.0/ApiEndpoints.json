@@ -73,6 +73,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SocialLibrary.Api.Controllers.FeedController",
+    "Method": "GetFeed",
+    "RelativePath": "api/Feed",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "take",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SocialLibrary.Api.Controllers.RatingsController",
     "Method": "Rate",
     "RelativePath": "api/Ratings",
@@ -237,26 +253,5 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "SocialLibrary.Api.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[SocialLibrary.Api.WeatherForecast, SocialLibrary.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ],
-    "EndpointName": "GetWeatherForecast"
   }
 ]

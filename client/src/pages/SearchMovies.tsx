@@ -32,7 +32,15 @@ export default function SearchMovies() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px,1fr))", gap: 12 }}>
         {items.map(it => (
   <Link key={it.externalId} to={`/content/movie/${it.externalId}`} style={{ textDecoration:"none", color:"inherit" }}>
-    <div style={{ border: "1px solid #eee", borderRadius: 12, padding: 10 }}>
+    <div style={{
+  border: "1px solid #ddd",
+  borderRadius: 12,
+  padding: 10,
+  background: "white",
+  boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+  cursor:'pointer',
+  transition:'transform .2s'
+}}>
       {it.coverUrl && <img src={it.coverUrl} alt={it.title} style={{ width: "100%", borderRadius: 8 }} />}
       <div style={{ marginTop: 8, fontWeight: 600 }}>{it.title}</div>
       <div style={{ color: "#666" }}>{it.year ?? "-"}</div>

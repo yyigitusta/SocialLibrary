@@ -53,7 +53,12 @@ export default function ContentDetail() {
   return (
     <div style={{ padding: 20 }}>
       <Link to={data.type === "book" ? "/search/books" : "/search/movies"}>{"← Geri"}</Link>
-      <div style={{ display: "flex", gap: 20, marginTop: 20, flexWrap: "wrap" }}>
+      <div style={{
+  background:"white",
+  padding:20,
+  borderRadius:12,
+  boxShadow:"0 2px 8px rgba(0,0,0,0.1)"
+}}>
         {cover && (
           <img
             src={cover}

@@ -44,10 +44,10 @@ export default function RatingBox({ type, externalId }: Props) {
       <h4>Puan Ver</h4>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <input
-          type="number"
+          type="range"
           min={1}
           max={10}
-          value={score ?? ""}
+          value={score ?? 5}
           onChange={(e) => setScore(parseInt(e.target.value))}
           style={{ width: 60 }}
         />
